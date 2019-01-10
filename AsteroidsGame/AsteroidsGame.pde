@@ -19,7 +19,7 @@ boolean SPACE_BAR;    //User is pressing space bar
   Initialize all of your variables and game state here
  */
 public void setup() {
-  size(640, 400);
+  size(800, 800);
   
   //initialize your asteroid array and fill it
   
