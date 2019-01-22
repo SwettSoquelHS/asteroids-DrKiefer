@@ -6,55 +6,47 @@
     but the final program should use "beginShap(), vertex(), and endShape()"
     to render the asteroid.
 */
-class Asteroid {   
-  protected float Xpos, Ypos;
-  protected float Speed;
-  protected float dir;
+class Asteroid extends Mover{   
+  //protected float x, y;
+ // protected float speed;
+ // protected float direction;
   //rotate player;
-  protected float radius;
-  public Asteroid(float Xpos, float Ypos, float Speed, float radius, float dir) {
-    this.Xpos = Xpos;
-    this.Ypos = Ypos;
-    this.Speed = Speed;
-    this.radius = radius;
-    this.dir = dir;
+  protected float radius = 50;
+  public Asteroid(float x, float y, float speed, float direction) {
+    super(x, y, speed, direction);
+    this.x = x;
+    this.y = y;
+    this.speed = speed;
+    //this.radius = radius;
+    this.direction = direction;
   }
 
 
-  void Move() {
-    Xpos = Xpos + Speed * (float)Math.cos(radians(dir));
-    Ypos = Ypos + Speed * (float)Math.sin(radians(dir));
-    if (Xpos > width) {
-      Xpos = 0;
-    }
-    if (Ypos > height) {
-      Ypos = 0;
-    }
-    if (Xpos < 0 ) {
-      Xpos = width;
-    }
-    if (Ypos < 0) {
-      Ypos = height;
-    }
+  void Mmove() {
+    
+  // x = x + speed*(float)Math.cos(radians(direction));
+   // y = y + speed*(float)Math.sin(radians(direction));
+    update();
+    
   }
-
-  void Show() {
-    fill(255);
-
+  void show() {
+    fill(100);
+    
     pushMatrix();
-    translate(Xpos, Ypos);
+    translate(x, y);
     //float randSizeX = random(-10 , 10);
-    ellipse(Xpos, Ypos, radius, radius);
+    ellipse(0,0, radius, radius);
     //vertex(
     popMatrix();
 
   }
-
+/*
   void CollisionDetection(float x2, float y2) {
     
-    if(dist(this.Xpos, this.Ypos, x2, y2) < 20  ) {
+    if(dist(this.x, this.y, x2, y2) < 20  ) {
      print("col"); 
     }
     
   }
+  */
 }

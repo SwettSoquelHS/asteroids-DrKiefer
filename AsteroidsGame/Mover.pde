@@ -103,10 +103,25 @@ abstract class Mover {// implements Movable {
   void update() {
     x = x + speed*(float)Math.cos(radians(direction));
     y = y + speed*(float)Math.sin(radians(direction));
-
+    
+    if (x > width) {
+     x = 0;
+      print(x);
+    }
+    if (y > height) {
+      y = 0;
+      print(y);
+    }
+    if (x < 0) {
+      x = width;
+    }
+    if (y < 0) {
+      y = height;
+    }
+  }
     //todo: You need to decide what to do when X is less than 0 or greater than width
     //todo: You need to decide what to do when Y is less than 0 or greater than height
-  }
+  
 
 
 

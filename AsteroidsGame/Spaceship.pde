@@ -4,7 +4,7 @@
     You may add additional methods to this class, for example "rotate" and "accelerate" 
     might be useful.
 */
-class Spaceship { //extends Mover  
+class Spaceship extends Mover{ //extends Mover  
   float x_pos, y_pos;
 float Shipspeed, direction;
 float angle;
@@ -14,23 +14,21 @@ boolean ROTATE_RIGHT = false;
 boolean MOVE_FORWARD = false;
 //float randPosX = random(0, width - 100);
 //float randPosY = random(0, height - 100);
-Asteroid[] ast = new Asteroid[20];
-void setup() {
-  size(800, 800);
-  x_pos = width/2.0;
-  y_pos = height/2.0;
+
+
+  Spaceship(float x, float y, float speed, float direction) {
+    super( x,  y,  speed,  direction);
+    //x_pos = width/2.0;
+   // y_pos = height/2.0;
 
   Shipspeed = 1;
   direction = 45;  
-  CreateAsteroid();
-}
+
+  }
+
 void draw() {
   background(0);
-  for (int i = 0; i < ast.length; i++) {
-    ast[i].Show();
-    ast[i].Move();
-    ast[i].CollisionDetection(x_pos, y_pos);
-  }
+ 
 
   MoveShip();
   pushMatrix();
@@ -93,16 +91,10 @@ void keyReleased() {
     }
   }
 }
-
-void CreateAsteroid() {
-  for (int i = 0; i < ast.length; i++) {
-    float randX = random(0, width);
-    float randY = random(0, height);
-
-    float AsteroidDir =  random(-360, 360);
-    ast[i] = new Asteroid(randX, randY, 1, 50, AsteroidDir);
-  }
+void show(){ 
+  
 }
+
 void MoveShip() {
   //Update x,y position
   if (ROTATE_LEFT) 
@@ -123,6 +115,5 @@ void MoveShip() {
   }
   x_pos = x_pos + Shipspeed * (float)Math.cos(radians(direction));
   y_pos = y_pos + Shipspeed * (float)Math.sin(radians(direction));
-}
 }
 }
