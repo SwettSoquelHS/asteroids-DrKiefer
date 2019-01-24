@@ -1,8 +1,9 @@
 /* * * * * * * * * * * * * * * * * * * * * * *
  Class variable declarations here
  */
-Spaceship player1;
+//Spaceship player1;
 Asteroid[] ast = new Asteroid[20];
+Spaceship player = new Spaceship(0, 0, 2, 90);
 //Asteroid[] asteroids;
 //Star[] starField;
 
@@ -22,7 +23,7 @@ boolean SPACE_BAR;    //User is pressing space bar
 public void setup() {
   size(800, 800);
   createAsteroid();
-
+  
   //initialize your asteroid array and fill it
 
   //initialize ship
@@ -37,7 +38,8 @@ public void setup() {
 public void draw() {
   //your code here
   background(0);
-
+  player.show();
+  player.move();
   for (int i = 0; i < ast.length; i++) {
     ast[i].show();
    // ast[i].move();

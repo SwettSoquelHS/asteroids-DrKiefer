@@ -22,7 +22,7 @@ class Asteroid extends Mover{
   }
 
 
-  void Mmove() {
+  void move() {
     
   // x = x + speed*(float)Math.cos(radians(direction));
    // y = y + speed*(float)Math.sin(radians(direction));
