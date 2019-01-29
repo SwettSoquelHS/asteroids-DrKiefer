@@ -20,7 +20,7 @@ boolean MOVE_FORWARD = false;
     super( x,  y,  speed,  direction);
     this.x = x;
     this.y = y;
-    this.speed = speed;
+    this.Shipspeed = speed;
     
     this.direction = direction;
     //x_pos = width/2.0;
@@ -71,14 +71,16 @@ void keyReleased() {
 }
 */
 void show(){ 
-   translate(x, y);
+   //translate(0, 0);
    pushMatrix();
-  rotate(radians(direction));
-  float cx = 0;
-  float cy = 0;
+  rotate(500);
+  float cx = x;
+  float cy = y;
   beginShape();
   fill(100);
+ 
   ellipse(x, y, shipRadius, shipRadius);
+   
   fill(2, 216, 111);
   ellipse(x, y, 10, 10);
   int lightsNum = 6;
@@ -87,7 +89,7 @@ void show(){
     float angle = i * TWO_PI / lightsNum;
     float x = cx + 10.0 * cos(angle);                
     float y = cy + 10.0 * sin(angle);                
-    ellipse(x, y, 5, 5);
+    //llipse(x, y, 5, 5);
   }
   endShape();
   popMatrix();
@@ -96,23 +98,23 @@ void show(){
 void move() {
   
   //Update x,y position
-  if (ROTATE_LEFT) 
-    direction-= 1.0;
-  if (ROTATE_RIGHT)
-    direction += 1.0;
-  if (MOVE_FORWARD == true) {
-    if (Shipspeed < 3) {
-      Shipspeed += 0.3;
-    }
-  } else {
-    if (Shipspeed > 0) {
-      Shipspeed -= 0.05;
-    }
-    if (Shipspeed < 0) {
-      Shipspeed = 0;
-    }
-  }
-  x = y + speed * (float)Math.cos(radians(direction));
-  x = y + speed * (float)Math.sin(radians(direction));
+  
+  x = x + Shipspeed * (float)Math.cos(radians(direction));
+  y = y + Shipspeed * (float)Math.sin(radians(direction));
+}
+
+void setSpeed(float speed) {
+  Shipspeed = speed;
+ 
+}
+void setDirection(float direction) {
+  this.direction = direction;
+}
+
+float getSpeed() {
+  return Shipspeed;
+}
+float getDirection() {
+  return direction;
 }
 }

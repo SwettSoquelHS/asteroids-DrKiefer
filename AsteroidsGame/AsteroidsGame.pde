@@ -3,7 +3,7 @@
  */
 //Spaceship player1;
 Asteroid[] ast = new Asteroid[20];
-Spaceship player = new Spaceship(0, 0, 2, 90);
+Spaceship player = new Spaceship(0, 0, 0 , 90);
 //Asteroid[] asteroids;
 //Star[] starField;
 
@@ -36,16 +36,44 @@ public void setup() {
  Drawing work here
  */
 public void draw() {
+  fill(25,40,88);
+ 
   //your code here
   background(0);
   player.show();
   player.move();
+  //player.update();
   for (int i = 0; i < ast.length; i++) {
     ast[i].show();
    // ast[i].move();
    ast[i].update();
     //ast[i].CollisionDetection(x, y);
   }
+  
+   if (ROTATE_LEFT) 
+  
+    player.setDirection(player.getDirection() - 1.0);
+     //ellipse(player.direction, player.direction, 5, 5);
+     //player.setDirection(1);
+    
+  if (ROTATE_RIGHT)
+  //player.setDirection(1);
+     player.setDirection(player.getDirection() + 1.0);
+     //ellipse(player.direction, player.direction, 5, 5);
+  if (MOVE_FORWARD == true) {
+    if (player.getSpeed() < 3) {
+      player.setSpeed(player.getSpeed() + 0.3);
+    }
+  } else {
+    if (player.getSpeed() > 0) {
+      player.setSpeed(player.getSpeed() - 0.3);
+      //ellipse(player.x, player.y, 20, 20);
+    }
+    if (player.getSpeed() < 0) {
+       player.setSpeed(0);
+    }
+  }
+
   //Draw Starfield first 
   //TODO: Part I
 

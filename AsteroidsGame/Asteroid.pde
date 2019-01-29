@@ -34,8 +34,17 @@ class Asteroid extends Mover{
     
     pushMatrix();
     translate(x, y);
+    
     //float randSizeX = random(-10 , 10);
-    ellipse(0,0, radius, radius);
+  //  ellipse(0,0, radius, radius);
+    
+    beginShape();
+    vertex(30, 80);
+    vertex(-30, 40);
+    vertex(10, -20);
+    vertex(35, -5);
+    vertex(20, 30);
+    endShape();
     //vertex(
     popMatrix();
 
