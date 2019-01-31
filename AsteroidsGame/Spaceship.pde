@@ -101,6 +101,8 @@ void move() {
   
   x = x + Shipspeed * (float)Math.cos(radians(direction));
   y = y + Shipspeed * (float)Math.sin(radians(direction));
+  
+  
 }
 
 void setSpeed(float speed) {

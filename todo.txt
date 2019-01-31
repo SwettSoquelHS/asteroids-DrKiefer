@@ -1,0 +1,7 @@
+fire bullets out of radius expansion
+
+collision detection
+
+create randomized asteroids
+
+background of stars
