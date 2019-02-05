@@ -2,8 +2,8 @@
  Class variable declarations here
  */
 //Spaceship player1;
-Asteroid[] ast = new Asteroid[20];
-Spaceship player = new Spaceship(-550, -175, 0 , 0);
+Asteroid[] ast = new Asteroid[10];
+Spaceship player = new Spaceship(-550, -175, 0, 0);
 //Asteroid[] asteroids;
 //Star[] starField;
 
@@ -23,7 +23,7 @@ boolean SPACE_BAR;    //User is pressing space bar
 public void setup() {
   size(800, 800);
   createAsteroid();
-  
+
   //initialize your asteroid array and fill it
 
   //initialize ship
@@ -36,8 +36,8 @@ public void setup() {
  Drawing work here
  */
 public void draw() {
-  fill(25,40,88);
- 
+  fill(25, 40, 88);
+
   //your code here
   background(0);
   player.show();
@@ -45,27 +45,41 @@ public void draw() {
   //player.update();
   for (int i = 0; i < ast.length; i++) {
     ast[i].show();
-    
-   // ast[i].move();
-   ast[i].update();
-   if(dist(ast[i].x, ast[i].y, player.x, player.y) < ast[i].radius + player.radius) {
-     fill(#F58B00);
-    ellipse(player.x,player.y, 30, 30); 
-    print("detected");
-   }
+
+    // ast[i].move();
+    ast[i].update();
+
+    fill(#F58B00);
+    ellipse(player.x, player.y, 30, 30); 
+    //print("detected");
+
     //ast[i].CollisionDetection(x, y);
   }
-  
-   if (ROTATE_LEFT) 
-  
+  for (int i = 0; i < ast.length; i++) {
+    for (int j = 0; j < ast.length; j++) {
+      if (dist(ast[i].x, ast[i].y, ast[j].x, ast[j].y) < 50 && j != i) {
+        //ast[i].direction = ast[i].direction * -1;
+        //ast[j].direction = ast[j].direction * -1;
+        ast[i].direction = random(-360, -270);
+        ast[i].x += 1;
+        ast[i].y += 1;
+        ast[j].direction = random(-360, -270);
+        
+        // print("col");
+      }
+    }
+  }
+
+  if (ROTATE_LEFT) 
+
     player.setDirection(player.getDirection() - 1.0);
-     //ellipse(player.direction, player.direction, 5, 5);
-     //player.setDirection(1);
-    
-  if (ROTATE_RIGHT)
+  //ellipse(player.direction, player.direction, 5, 5);
   //player.setDirection(1);
-     player.setDirection(player.getDirection() + 1.0);
-     //ellipse(player.direction, player.direction, 5, 5);
+
+  if (ROTATE_RIGHT)
+    //player.setDirection(1);
+    player.setDirection(player.getDirection() + 1.0);
+  //ellipse(player.direction, player.direction, 5, 5);
   if (MOVE_FORWARD == true) {
     if (player.getSpeed() < 3) {
       player.setSpeed(player.getSpeed() + 0.3);
@@ -76,7 +90,7 @@ public void draw() {
       //ellipse(player.x, player.y, 20, 20);
     }
     if (player.getSpeed() < 0) {
-       player.setSpeed(0);
+      player.setSpeed(0);
     }
   }
 
@@ -112,11 +126,11 @@ public void draw() {
 
 void createAsteroid() {
   for (int i = 0; i < ast.length; i++) {
-   float randX = random(0, 200);
-   float randY = random(0, 200);
+    float randX = random(0, 800);
+    float randY = random(0, 800);
 
     float AsteroidDir =  random(-360, 360);
-    ast[i] = new Asteroid(10, 10 , 1, AsteroidDir);
+    ast[i] = new Asteroid(randX, randY, 1, AsteroidDir);
   }
 }
 

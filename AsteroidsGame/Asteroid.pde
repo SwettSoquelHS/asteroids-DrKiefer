@@ -7,10 +7,10 @@
  to render the asteroid.
  */
 class Asteroid extends Mover {   
-  
+  public int fillColor = 100;
   //protected float x, y;
   // protected float speed;
- // protected float direction;
+  //protected float direction;
   //rotate player;
   protected float radius = 50;
   public Asteroid(float x, float y, float speed, float direction) {
@@ -30,8 +30,8 @@ class Asteroid extends Mover {
     update();
   }
   void show() {
-     
-    fill(100);
+    
+    fill(fillColor);
 
     pushMatrix();
     translate(x, y);
@@ -51,7 +51,13 @@ class Asteroid extends Mover {
     vertex(1,9);
     endShape();
     popMatrix();
+    
+    
   }
+  
+  //public float getDirection() {
+  //  return direction;
+  //}
   /*
   void CollisionDetection(float x2, float y2) {
    
