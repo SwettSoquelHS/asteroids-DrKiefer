@@ -96,7 +96,7 @@ void show(){
 }
 
 void move() {
-  
+ 
   //Update x,y position
   
   x = x + Shipspeed * (float)Math.cos(radians(direction));

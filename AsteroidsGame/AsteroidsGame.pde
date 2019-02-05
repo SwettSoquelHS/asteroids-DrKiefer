@@ -3,7 +3,7 @@
  */
 //Spaceship player1;
 Asteroid[] ast = new Asteroid[20];
-Spaceship player = new Spaceship(0, 0, 0 , 90);
+Spaceship player = new Spaceship(-550, -175, 0 , 0);
 //Asteroid[] asteroids;
 //Star[] starField;
 
@@ -45,8 +45,14 @@ public void draw() {
   //player.update();
   for (int i = 0; i < ast.length; i++) {
     ast[i].show();
+    
    // ast[i].move();
    ast[i].update();
+   if(dist(ast[i].x, ast[i].y, player.x, player.y) < ast[i].radius + player.radius) {
+     fill(#F58B00);
+    ellipse(player.x,player.y, 30, 30); 
+    print("detected");
+   }
     //ast[i].CollisionDetection(x, y);
   }
   
@@ -106,11 +112,11 @@ public void draw() {
 
 void createAsteroid() {
   for (int i = 0; i < ast.length; i++) {
-    float randX = random(0, width);
-    float randY = random(0, height);
+   float randX = random(0, 200);
+   float randY = random(0, 200);
 
     float AsteroidDir =  random(-360, 360);
-    ast[i] = new Asteroid(randX, randY, 1, AsteroidDir);
+    ast[i] = new Asteroid(10, 10 , 1, AsteroidDir);
   }
 }
 

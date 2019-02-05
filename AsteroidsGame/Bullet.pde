@@ -9,7 +9,7 @@ class Bullet extends Mover {
     super(x,y, speed, direction);
   }
   void show() {
-    iEnumerator(5);
+   ellipse(x,y, 2, 2);
   }
   
   void move() {
@@ -17,14 +17,14 @@ class Bullet extends Mover {
     
   }
   
-  void iEnumerator(int waitTime) {
-    for(int i = 0; i < numofBullets; i++) {
-      float angle = (float)(i * Math.PI * 2 / numofBullets);
-      float cosX = (float)Math.cos(angle);
-      float sinY = (float)Math.sin(angle);
-      fill(#0AC9B7);
-      ellipse(cosX, sinY, 10, 10);
-  }
-  }
+  //void iEnumerator(int waitTime) {
+  //  for(int i = 0; i < numofBullets; i++) {
+  //    float angle = (float)(i * Math.PI * 2 / numofBullets);
+  //    float cosX = (float)Math.cos(angle);
+  //    float sinY = (float)Math.sin(angle);
+  //    fill(#0AC9B7);
+  //    ellipse(cosX, sinY, 10, 10);
+  //}
+  //}
   
 }
