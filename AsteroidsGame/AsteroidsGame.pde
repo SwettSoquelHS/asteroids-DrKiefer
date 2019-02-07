@@ -3,7 +3,7 @@
  */
 //Spaceship player1;
 Asteroid[] ast = new Asteroid[10];
-Spaceship player = new Spaceship(-550, -175, 0, 0);
+Spaceship player = new Spaceship(0, 0, 0, 0);
 //Asteroid[] asteroids;
 //Star[] starField;
 
@@ -23,7 +23,8 @@ boolean SPACE_BAR;    //User is pressing space bar
 public void setup() {
   size(800, 800);
   createAsteroid();
-
+  player.x = width/2;
+  player.y = height/2;
   //initialize your asteroid array and fill it
 
   //initialize ship
@@ -43,19 +44,26 @@ public void draw() {
   player.show();
   player.move();
   //player.update();
+  fill(#F58B00);
+
+  ellipse(player.x, player.y, 30, 30); 
   for (int i = 0; i < ast.length; i++) {
     ast[i].show();
 
     // ast[i].move();
     ast[i].update();
-
-    fill(#F58B00);
-    ellipse(player.x, player.y, 30, 30); 
-    //print("detected");
-
-    //ast[i].CollisionDetection(x, y);
+    if (dist(player.x, player.y, ast[i].x, ast[i].y) < 50) {
+      print("player hit");
+    }
   }
+
+  //  if(player
+  //print("detected");
+
+  //ast[i].CollisionDetection(x, y);
+
   for (int i = 0; i < ast.length; i++) {
+
     for (int j = 0; j < ast.length; j++) {
       if (dist(ast[i].x, ast[i].y, ast[j].x, ast[j].y) < 50 && j != i) {
         //ast[i].direction = ast[i].direction * -1;
@@ -64,7 +72,7 @@ public void draw() {
         ast[i].x += 1;
         ast[i].y += 1;
         ast[j].direction = random(-360, -270);
-        
+
         // print("col");
       }
     }
@@ -93,6 +101,7 @@ public void draw() {
       player.setSpeed(0);
     }
   }
+
 
   //Draw Starfield first 
   //TODO: Part I

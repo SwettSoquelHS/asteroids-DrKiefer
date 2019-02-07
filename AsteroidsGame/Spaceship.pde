@@ -71,7 +71,7 @@ void keyReleased() {
 }
 */
 void show(){ 
-   //translate(0, 0);
+  
    pushMatrix();
   rotate(500);
   float cx = x;
@@ -98,10 +98,12 @@ void show(){
 void move() {
  
   //Update x,y position
+ // translate(this.x, this.y);
+  //this.x = this.x + Shipspeed * (float)Math.cos(radians(direction));
+  //this.y = this.y + Shipspeed * (float)Math.sin(radians(direction));
   
-  x = x + Shipspeed * (float)Math.cos(radians(direction));
+   x = x + Shipspeed * (float)Math.cos(radians(direction));
   y = y + Shipspeed * (float)Math.sin(radians(direction));
-  
   
 }
 
@@ -119,4 +121,11 @@ float getSpeed() {
 float getDirection() {
   return direction;
 }
+float getX() {
+  return x;
+}
+float getY() {
+  return y;
+}
+  
 }
