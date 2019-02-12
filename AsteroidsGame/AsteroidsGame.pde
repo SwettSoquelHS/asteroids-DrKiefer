@@ -43,6 +43,7 @@ public void draw() {
   background(0);
   player.show();
   player.move();
+  player.update();
   //player.update();
   fill(#F58B00);
 
@@ -53,7 +54,8 @@ public void draw() {
     // ast[i].move();
     ast[i].update();
     if (dist(player.x, player.y, ast[i].x, ast[i].y) < 50) {
-      print("player hit");
+     // print("player hit");
+   //noLoop();
     }
   }
 

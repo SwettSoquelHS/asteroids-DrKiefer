@@ -32,7 +32,7 @@ boolean MOVE_FORWARD = false;
   }
 
 void draw() {
-  
+  update();
  
 
  // move();
