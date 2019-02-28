@@ -4,6 +4,7 @@
 //Spaceship player1;
 Asteroid[] ast = new Asteroid[10];
 Spaceship player = new Spaceship(0, 0, 0, 0);
+ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 //Asteroid[] asteroids;
 //Star[] starField;
 
@@ -25,6 +26,7 @@ public void setup() {
   createAsteroid();
   player.x = width/2;
   player.y = height/2;
+  
   //initialize your asteroid array and fill it
 
   //initialize ship
@@ -54,8 +56,8 @@ public void draw() {
     // ast[i].move();
     ast[i].update();
     if (dist(player.x, player.y, ast[i].x, ast[i].y) < 50) {
-     // print("player hit");
-   //noLoop();
+      // print("player hit");
+      //noLoop();
     }
   }
 
@@ -103,7 +105,20 @@ public void draw() {
       player.setSpeed(0);
     }
   }
-
+  if(SPACE_BAR) {
+    print("space bar pressed");
+    
+    for(Bullet a: bullets) {
+        a = new Bullet(player.x, player.y, 0.1, player.getDirection());
+        bullets.add(a);
+    }
+    for(Bullet b: bullets) {
+      
+     // bullets.add(b);
+      b.show();
+      b.move();
+    }
+  }
 
   //Draw Starfield first 
   //TODO: Part I

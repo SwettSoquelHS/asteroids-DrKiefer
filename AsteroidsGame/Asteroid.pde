@@ -30,7 +30,7 @@ class Asteroid extends Mover {
     update();
   }
   void show() {
-    
+
     fill(fillColor);
 
     pushMatrix();
@@ -40,21 +40,19 @@ class Asteroid extends Mover {
     //  ellipse(0,0, radius, radius);
     scale(4);
     beginShape();
-    vertex(1,9);
-    vertex(4,5);
-    vertex(7,3);
-    vertex(3,-3);
+    vertex(1, 9);
+    vertex(4, 5);
+    vertex(7, 3);
+    vertex(3, -3);
     vertex(0, -6);
     vertex(-5, -4);
     vertex(-7, 0);
-    vertex(-5,5);
-    vertex(1,9);
+    vertex(-5, 5);
+    vertex(1, 9);
     endShape();
     popMatrix();
-    
-    
   }
-  
+
   //public float getDirection() {
   //  return direction;
   //}
