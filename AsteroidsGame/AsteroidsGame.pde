@@ -2,9 +2,10 @@
  Class variable declarations here
  */
 //Spaceship player1;
-Asteroid[] ast = new Asteroid[10];
+ArrayList<Asteroid> ast = new ArrayList<Asteroid>(10);
 Spaceship player = new Spaceship(0, 0, 0, 0);
 ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+Boolean fireTrue = false;
 //Asteroid[] asteroids;
 //Star[] starField;
 
@@ -26,7 +27,7 @@ public void setup() {
   createAsteroid();
   player.x = width/2;
   player.y = height/2;
-  
+  // frameRate(2);
   //initialize your asteroid array and fill it
 
   //initialize ship
@@ -50,12 +51,12 @@ public void draw() {
   fill(#F58B00);
 
   ellipse(player.x, player.y, 30, 30); 
-  for (int i = 0; i < ast.length; i++) {
-    ast[i].show();
+  for (Asteroid a : ast) {
+    a.show();
 
     // ast[i].move();
-    ast[i].update();
-    if (dist(player.x, player.y, ast[i].x, ast[i].y) < 50) {
+    a.update();
+    if (dist(player.x, player.y, a.x, a.y) < 50) {
       // print("player hit");
       //noLoop();
     }
@@ -65,23 +66,43 @@ public void draw() {
   //print("detected");
 
   //ast[i].CollisionDetection(x, y);
+  for (Bullet b : bullets) {
 
-  for (int i = 0; i < ast.length; i++) {
+    // bullets.add(b);
+    b.show();
+    b.move();
+  }
+  for (Asteroid a : ast) {
 
-    for (int j = 0; j < ast.length; j++) {
-      if (dist(ast[i].x, ast[i].y, ast[j].x, ast[j].y) < 50 && j != i) {
+    for (Asteroid b : ast) {
+      if (dist(a.x, a.y, b.x, b.y) < 50 && b != a) {
         //ast[i].direction = ast[i].direction * -1;
         //ast[j].direction = ast[j].direction * -1;
-        ast[i].direction = random(-360, -270);
-        ast[i].x += 1;
-        ast[i].y += 1;
-        ast[j].direction = random(-360, -270);
+        a.direction = random(-360, -270);
+        a.x += 1;
+        a.y += 1;
+        b.direction = random(-360, -270);
 
         // print("col");
       }
     }
+  }      
+  for (Bullet a : bullets) {
+    for (Asteroid b : ast) {
+      if (dist(a.x, a.y, b.x, b.y) < 50) {
+        for (int i = 0; i < 3; i++) {
+          float AsteroidDir =  random(-360, 360);
+          Asteroid c = new Asteroid(b.x, b.y, 1, AsteroidDir);
+          ast.add(c);
+        }
+        //for (int j = 0; j < 3; j++) {
+        //  float AsteroidDir =  random(-360, 360);
+        //  Asteroid b = new Asteroid(ast[i].x, ast[i].y, 1, AsteroidDir);
+        //  //b.radius = 10;
+        //b.fillColor = 255;
+      }
+    }
   }
-
   if (ROTATE_LEFT) 
 
     player.setDirection(player.getDirection() - 1.0);
@@ -105,19 +126,14 @@ public void draw() {
       player.setSpeed(0);
     }
   }
-  if(SPACE_BAR) {
-    print("space bar pressed");
-    
-    for(Bullet a: bullets) {
-        a = new Bullet(player.x, player.y, 0.1, player.getDirection());
-        bullets.add(a);
+  if (SPACE_BAR) {
+    // print("space bar pressed");
+
+    if (fireTrue == true) {
+      Bullet a = new Bullet(player.getX(), player.getY(), 5, player.getDirection());
+      bullets.add(a);
     }
-    for(Bullet b: bullets) {
-      
-     // bullets.add(b);
-      b.show();
-      b.move();
-    }
+    fireTrue = false;
   }
 
   //Draw Starfield first 
@@ -151,12 +167,14 @@ public void draw() {
 
 
 void createAsteroid() {
-  for (int i = 0; i < ast.length; i++) {
+  for (int i = 0; i < 10; i++) {
     float randX = random(0, 800);
     float randY = random(0, 800);
 
     float AsteroidDir =  random(-360, 360);
-    ast[i] = new Asteroid(randX, randY, 1, AsteroidDir);
+  
+    Asteroid a = new Asteroid(randX, randY, 1, AsteroidDir);
+    ast.add(a);
   }
 }
 
@@ -176,8 +194,9 @@ void keyPressed() {
   }
 
   //32 is spacebar
-  if (keyCode == 32) {  
+  if (keyCode == 32 && SPACE_BAR == false) {  
     SPACE_BAR = true;
+    fireTrue = true;
   }
 }
 
@@ -198,5 +217,6 @@ void keyReleased() {
   }
   if (keyCode == 32) {
     SPACE_BAR = false;
+    //if(
   }
 }

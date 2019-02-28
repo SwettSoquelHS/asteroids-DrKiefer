@@ -12,7 +12,7 @@ class Asteroid extends Mover {
   // protected float speed;
   //protected float direction;
   //rotate player;
-  protected float radius = 50;
+  public float radius = 50;
   public Asteroid(float x, float y, float speed, float direction) {
     super(x, y, speed, direction);
     this.x = x;
@@ -30,7 +30,7 @@ class Asteroid extends Mover {
     update();
   }
   void show() {
-
+  print("showing ast");
     fill(fillColor);
 
     pushMatrix();

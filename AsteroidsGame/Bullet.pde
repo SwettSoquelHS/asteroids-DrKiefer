@@ -6,19 +6,25 @@ class Bullet extends Mover {
   float radius;
   protected int numofBullets;
   Bullet(float x, float y, float speed, float direction) {
+    
     super(x, y, speed, direction);
+    
+    this.x = x;
+    this.y = y;
+    this.speed = speed;
+    this.direction = direction;
   }
   void show() {
     fill(255);
-    ellipse(x, y, 100, 100);
-    print("showed");
+    ellipse(x, y, 5, 5);
+    //print("showed");
   }
 
   void move() {
-
+ 
     x = x + speed * (float)Math.cos(radians(direction));
     y = y + speed * (float)Math.sin(radians(direction));
-     print("moved");
+    // print("moved");
   }
 
   //void iEnumerator(int waitTime) {
