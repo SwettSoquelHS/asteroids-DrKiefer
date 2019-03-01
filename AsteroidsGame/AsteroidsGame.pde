@@ -87,6 +87,7 @@ public void draw() {
       }
     }
   }      
+  //fix
   for (Bullet a : bullets) {
     for (Asteroid b : ast) {
       if (dist(a.x, a.y, b.x, b.y) < 50) {
