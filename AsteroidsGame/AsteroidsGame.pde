@@ -4,8 +4,10 @@
 //Spaceship player1;
 ArrayList<Asteroid> ast = new ArrayList<Asteroid>(10);
 Spaceship player = new Spaceship(0, 0, 0, 0);
-ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+ArrayList<Bullet> bullets = new ArrayList<Bullet>(10);
+Star star;
 Boolean fireTrue = false;
+Boolean hitTrue = false;
 //Asteroid[] asteroids;
 //Star[] starField;
 
@@ -17,14 +19,17 @@ boolean ROTATE_LEFT;  //User is pressing <-
 boolean ROTATE_RIGHT; //User is pressing ->
 boolean MOVE_FORWARD; //User is pressing ^ arrow
 boolean SPACE_BAR;    //User is pressing space bar
-
-
+String score = "Score: ";
+int points = 0;
 /* * * * * * * * * * * * * * * * * * * * * * *
  Initialize all of your variables and game state here
  */
 public void setup() {
   size(800, 800);
   createAsteroid();
+  float randX = random(0, width);
+  float randY = random(0, height);
+  star = new Star(randX, randY, 1, 30);
   player.x = width/2;
   player.y = height/2;
   // frameRate(2);
@@ -40,24 +45,36 @@ public void setup() {
  Drawing work here
  */
 public void draw() {
-  fill(25, 40, 88);
-
-  //your code here
   background(0);
+  checkScore();
+  //fill(25, 40, 88);
+  textSize(32);
+  fill(#007E09);
+  text(score + points, 10, 30); 
+
+  star.show();
+  //your code here
+  
   player.show();
   player.move();
   player.update();
   //player.update();
-  fill(#F58B00);
+  //fill(#F58B00);
+  fill(100);
+  ellipse(player.x, player.y, 30, 30);
 
-  ellipse(player.x, player.y, 30, 30); 
+  fill(2, 216, 111);
+  ellipse(player.x, player.y, 10, 10);
   for (Asteroid a : ast) {
     a.show();
 
     // ast[i].move();
     a.update();
     if (dist(player.x, player.y, a.x, a.y) < 50) {
-      // print("player hit");
+      fill(#FF8D00);
+      ellipse(player.x,player.y,100,100);
+      noLoop();
+       //print("player hit");
       //noLoop();
     }
   }
@@ -76,34 +93,61 @@ public void draw() {
 
     for (Asteroid b : ast) {
       if (dist(a.x, a.y, b.x, b.y) < 50 && b != a) {
-        //ast[i].direction = ast[i].direction * -1;
-        //ast[j].direction = ast[j].direction * -1;
-        a.direction = random(-360, -270);
-        a.x += 1;
-        a.y += 1;
-        b.direction = random(-360, -270);
 
-        // print("col");
+        a.direction = random(-360, -270);
+        //a.x += 1;
+        //a.y += 1;
+        b.direction = random(-360, -270);
+        //a.direction = a.getDirection() * -1;
+        //b.direction = b.getDirection() * -1;
       }
     }
   }      
   //fix
-  for (Bullet a : bullets) {
-    for (Asteroid b : ast) {
-      if (dist(a.x, a.y, b.x, b.y) < 50) {
-        for (int i = 0; i < 3; i++) {
+  for (int m = 0; m < bullets.size(); m++) {
+    Bullet n = (Bullet)bullets.get(m);
+    for (int i = 0; i < ast.size(); i++) {
+
+      Asteroid b = (Asteroid)ast.get(i);
+      if (dist(n.x, n.y, b.x, b.y) < 50) {
+        //print("hit");
+
+        if (b.radius == 4) {
+
+          points++;
           float AsteroidDir =  random(-360, 360);
           Asteroid c = new Asteroid(b.x, b.y, 1, AsteroidDir);
+          c.radius = 2;
           ast.add(c);
+          ast.remove(b);
+          bullets.remove(n);
         }
-        //for (int j = 0; j < 3; j++) {
-        //  float AsteroidDir =  random(-360, 360);
-        //  Asteroid b = new Asteroid(ast[i].x, ast[i].y, 1, AsteroidDir);
-        //  //b.radius = 10;
-        //b.fillColor = 255;
       }
     }
   }
+
+  for (int m = 0; m < bullets.size(); m++) {
+    Bullet n = (Bullet)bullets.get(m);
+    for (int i = 0; i < ast.size(); i++) {
+
+      Asteroid b = (Asteroid)ast.get(i);
+      if (dist(n.x, n.y, b.x, b.y) < 20) {
+        if (b.radius == 2) {
+          points++;
+          ast.remove(b);
+          bullets.remove(n);
+          //}
+        }
+      }
+    }
+  }
+  //for (int j = 0; j < 3; j++) {
+  //  float AsteroidDir =  random(-360, 360);
+  //  Asteroid b = new Asteroid(ast[i].x, ast[i].y, 1, AsteroidDir);
+  //  //b.radius = 10;
+  //b.fillColor = 255;
+
+
   if (ROTATE_LEFT) 
 
     player.setDirection(player.getDirection() - 1.0);
@@ -173,7 +217,7 @@ void createAsteroid() {
     float randY = random(0, 800);
 
     float AsteroidDir =  random(-360, 360);
-  
+
     Asteroid a = new Asteroid(randX, randY, 1, AsteroidDir);
     ast.add(a);
   }
@@ -221,3 +265,9 @@ void keyReleased() {
     //if(
   }
 }
+  
+  void checkScore() {
+    if(ast.size() == 0) {
+      createAsteroid();
+    }
+  }

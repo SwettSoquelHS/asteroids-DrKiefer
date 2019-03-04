@@ -106,11 +106,11 @@ abstract class Mover {// implements Movable {
 
     if (x > width) {
       x = 0;
-      print(x);
+    //  print(x);
     }
     if (y > height) {
       y = 0;
-      print(y);
+      //print(y);
     }
     if (x < 0) {
       x = width;

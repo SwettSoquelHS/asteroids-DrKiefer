@@ -71,12 +71,8 @@ void keyReleased() {
     float cx = x;
     float cy = y;
     beginShape();
-    fill(100);
-
-    ellipse(x, y, shipRadius, shipRadius);
-
-    fill(2, 216, 111);
-    ellipse(x, y, 10, 10);
+    fill(255);
+    
     int lightsNum = 6;
     for (int i = 0; i < lightsNum; i++) {
       fill(#FAF200);
