@@ -31,6 +31,52 @@ class Star extends Mover {
   }
 
   void ships() {
+     pushMatrix();
+       fill(#F0B55C);
+      
+      translate(x, y);
+      scale(radius);
+      rotate(x/100);
+
+      beginShape();
+      stroke(#F0B55C);//head
+      vertex(0, 7);
+      vertex(1, 6);
+      vertex(0, 5);
+      vertex(-1, 6);
+      vertex(0, 7);
+      endShape();
+
+      beginShape();//torso
+      vertex(0, 5);
+      vertex(0, 4);
+      vertex(0, 2);
+      endShape();
+
+      beginShape(); // rightArm
+      vertex(0, 4);
+      vertex(2, 3);
+      vertex(3, 3);
+      endShape();
+
+      beginShape(); //leftArm
+      vertex(0, 4);
+      vertex(-1, 3);
+      vertex(-2, 2);
+      endShape();
+
+      beginShape();//leftLeg
+      vertex(-1, 1);
+      vertex(-1, -1);
+      vertex(-2, -2);
+      endShape();
+
+      beginShape(); // rightLeg
+      vertex(1, 1);
+      vertex(2, -1);
+      vertex(0, -2);
+      endShape();
+      popMatrix();
   }
 
   float getX() {

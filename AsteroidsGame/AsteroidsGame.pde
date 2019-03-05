@@ -19,7 +19,7 @@ boolean ROTATE_LEFT;  //User is pressing <-
 boolean ROTATE_RIGHT; //User is pressing ->
 boolean MOVE_FORWARD; //User is pressing ^ arrow
 boolean SPACE_BAR;    //User is pressing space bar
-String score = "Score: ";
+String score = "Dead Enemys: ";
 int points = 0;
 /* * * * * * * * * * * * * * * * * * * * * * *
  Initialize all of your variables and game state here
@@ -61,6 +61,7 @@ public void draw() {
   //player.update();
   //fill(#F58B00);
   fill(100);
+  stroke(100);
   ellipse(player.x, player.y, 30, 30);
 
   fill(2, 216, 111);
@@ -70,13 +71,20 @@ public void draw() {
 
     // ast[i].move();
     a.update();
-    if (dist(player.x, player.y, a.x, a.y) < 50) {
+    if (dist(player.x, player.y, a.x, a.y) < 40 && a.radius == 10) {
       fill(#FF8D00);
       ellipse(player.x,player.y,100,100);
       noLoop();
        //print("player hit");
       //noLoop();
-    }
+    } 
+     if (dist(player.x, player.y, a.x, a.y) < 20 && a.radius == 2) {
+      fill(#FF8D00);
+      ellipse(player.x,player.y,100,100);
+      noLoop();
+       //print("player hit");
+      //noLoop();
+    } 
   }
 
   //  if(player
@@ -112,12 +120,13 @@ public void draw() {
       if (dist(n.x, n.y, b.x, b.y) < 50) {
         //print("hit");
 
-        if (b.radius == 4) {
+        if (b.radius == 10) {
 
           points++;
           float AsteroidDir =  random(-360, 360);
           Asteroid c = new Asteroid(b.x, b.y, 1, AsteroidDir);
           c.radius = 2;
+          c.isShip = false;
           ast.add(c);
           ast.remove(b);
           bullets.remove(n);
