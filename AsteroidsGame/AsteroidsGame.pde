@@ -2,10 +2,10 @@
  Class variable declarations here
  */
 //Spaceship player1;
-ArrayList<Asteroid> ast = new ArrayList<Asteroid>(10);
-Spaceship player = new Spaceship(0, 0, 0, 0);
-ArrayList<Bullet> bullets = new ArrayList<Bullet>(10);
-Star star;
+ArrayList<Asteroid> ast;
+Spaceship player;
+ArrayList<Bullet> bullets;
+private Star star;
 Boolean fireTrue = false;
 Boolean hitTrue = false;
 //Asteroid[] asteroids;
@@ -26,10 +26,14 @@ int points = 0;
  */
 public void setup() {
   size(800, 800);
+  ast =  new ArrayList<Asteroid>(10);
+  player  = new Spaceship(0, 0, 0, 0);
+  bullets  = new ArrayList<Bullet>(10);
+  star  = new Star();
   createAsteroid();
   float randX = random(0, width);
   float randY = random(0, height);
-  star = new Star(randX, randY, 1, 30);
+  //star = new Star();
   player.x = width/2;
   player.y = height/2;
   // frameRate(2);
@@ -46,18 +50,21 @@ public void setup() {
  */
 public void draw() {
   background(0);
+  star.show();   //<>//
   checkScore();
   //fill(25, 40, 88);
   textSize(32);
   fill(#007E09);
   text(score + points, 10, 30); 
 
-  star.show();
+  
   //your code here
   
   player.show();
   player.move();
   player.update();
+  
+  //  star.show();
   //player.update();
   //fill(#F58B00);
   fill(100);
@@ -65,6 +72,7 @@ public void draw() {
   ellipse(player.x, player.y, 30, 30);
 
   fill(2, 216, 111);
+ 
   ellipse(player.x, player.y, 10, 10);
   for (Asteroid a : ast) {
     a.show();
@@ -217,6 +225,7 @@ public void draw() {
 
   //Update score
   //TODO: Keep track of a score and output the score at the top right
+   
 }
 
 
